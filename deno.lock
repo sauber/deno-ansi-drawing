@@ -1,0 +1,96 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@sauber/block-image@^2.1.0": "2.1.0",
+    "jsr:@sauber/widgets@~0.6.2": "0.6.2",
+    "jsr:@std/assert@^1.0.19": "1.0.19",
+    "jsr:@std/cli@^1.0.24": "1.0.29",
+    "jsr:@std/fmt@^1.0.8": "1.0.10",
+    "jsr:@std/internal@^1.0.12": "1.0.13",
+    "npm:cli-truncate@^5.1.1": "5.2.0",
+    "npm:downsample-lttb-ts@^0.0.6": "0.0.6"
+  },
+  "jsr": {
+    "@sauber/block-image@2.1.0": {
+      "integrity": "ca8f415eec13e0fa6fcdfa11a9450c6bb277a52746f2db61617cee2a2306bedb"
+    },
+    "@sauber/widgets@0.6.2": {
+      "integrity": "6f215f9b7ed8da3161fe2cee0a1b19697942587d89679015545e1ff539024037",
+      "dependencies": [
+        "jsr:@sauber/block-image",
+        "jsr:@std/cli",
+        "jsr:@std/fmt",
+        "npm:cli-truncate",
+        "npm:downsample-lttb-ts"
+      ]
+    },
+    "@std/assert@1.0.19": {
+      "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/cli@1.0.29": {
+      "integrity": "fa4ef29130baa834d8a13b7d138240c3a2fcfba740bfb7afa646a360a15ec84f"
+    },
+    "@std/fmt@1.0.10": {
+      "integrity": "90dfba288802ac6de82fb31d0917eb9e4450b9925b954d5e51fc29ac07419db5"
+    },
+    "@std/internal@1.0.13": {
+      "integrity": "2f9546691d4ac2d32859c82dff284aaeac980ddeca38430d07941e7e288725c0"
+    }
+  },
+  "npm": {
+    "ansi-regex@6.2.2": {
+      "integrity": "sha512-Bq3SmSpyFHaWjPk8If9yc6svM8c56dB5BAtW4Qbw5jHTwwXXcTLoRMkpDJp6VL0XzlWaCHTXrkFURMYmD0sLqg=="
+    },
+    "ansi-styles@6.2.3": {
+      "integrity": "sha512-4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg=="
+    },
+    "cli-truncate@5.2.0": {
+      "integrity": "sha512-xRwvIOMGrfOAnM1JYtqQImuaNtDEv9v6oIYAs4LIHwTiKee8uwvIi363igssOC0O5U04i4AlENs79LQLu9tEMw==",
+      "dependencies": [
+        "slice-ansi",
+        "string-width"
+      ]
+    },
+    "downsample-lttb-ts@0.0.6": {
+      "integrity": "sha512-3kqUyXZEHCiwxQ2P2iNfDvUCCc2aFdN215XST6CblC6H2Bm8bBM31FvZz2rKMSosiJUYn4KefZnz+ZEIyk7q1A=="
+    },
+    "get-east-asian-width@1.5.0": {
+      "integrity": "sha512-CQ+bEO+Tva/qlmw24dCejulK5pMzVnUOFOijVogd3KQs07HnRIgp8TGipvCCRT06xeYEbpbgwaCxglFyiuIcmA=="
+    },
+    "is-fullwidth-code-point@5.1.0": {
+      "integrity": "sha512-5XHYaSyiqADb4RnZ1Bdad6cPp8Toise4TzEjcOYDHZkTCbKgiUl7WTUCpNWHuxmDt91wnsZBc9xinNzopv3JMQ==",
+      "dependencies": [
+        "get-east-asian-width"
+      ]
+    },
+    "slice-ansi@8.0.0": {
+      "integrity": "sha512-stxByr12oeeOyY2BlviTNQlYV5xOj47GirPr4yA1hE9JCtxfQN0+tVbkxwCtYDQWhEKWFHsEK48ORg5jrouCAg==",
+      "dependencies": [
+        "ansi-styles",
+        "is-fullwidth-code-point"
+      ]
+    },
+    "string-width@8.2.1": {
+      "integrity": "sha512-IIaP0g3iy9Cyy18w3M9YcaDudujEAVHKt3a3QJg1+sr/oX96TbaGUubG0hJyCjCBThFH+tFpcIyoUHUn1ogaLA==",
+      "dependencies": [
+        "get-east-asian-width",
+        "strip-ansi"
+      ]
+    },
+    "strip-ansi@7.2.0": {
+      "integrity": "sha512-yDPMNjp4WyfYBkHnjIRLfca1i6KMyGCtsVgoKe/z1+6vukgaENdgGBZt+ZmKPc4gavvEZ5OgHfHdrazhgNyG7w==",
+      "dependencies": [
+        "ansi-regex"
+      ]
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@sauber/widgets@~0.6.2",
+      "jsr:@std/assert@^1.0.19"
+    ]
+  }
+}

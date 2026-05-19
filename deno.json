@@ -1,0 +1,28 @@
+{
+  "name": "@sauber/ansi-draw",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": "./mod.ts",
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.19",
+    "@std/cli": "jsr:@std/cli@^1.0.29",
+    "@std/fmt": "jsr:@std/fmt@^1.0.10",
+    "cli-truncate": "npm:cli-truncate@^6.0.0"
+  },
+  "lock": false,
+  "publish": {
+    "exclude": [
+      "src/*/*.test.ts"
+    ],
+    "include": [
+      "LICENSE",
+      "README.md",
+      "mod.ts",
+      "example.ts",
+      "src/*/*.ts"
+    ]
+  },
+  "tasks": {
+    "example": "deno run example.ts"
+  }
+}
