@@ -4,8 +4,8 @@ import type { Canvas } from "./types.ts";
  * @param canvas The canvas to draw on
  * @param x The x-coordinate of the bottom-left corner of the frame
  * @param y The y-coordinate of the bottom-left corner of the frame
- * @param width The width of the frame, minimum 2
- * @param height The height of the frame, minimum 2
+ * @param width The width of the frame; values < 3 are treated as 3
+ * @param height The height of the frame; values < 3 are treated as 3
  * @param ansi The ANSI code for the frame characters
  */
 export function drawFrame(
@@ -16,26 +16,31 @@ export function drawFrame(
   height: number,
   ansi?: string,
 ): void {
-  // Confirm that the width and height are sufficient to draw a frame
-  if (width < 2 || height < 2) {
-    throw new Error("Width and height must be at least 2 to draw a frame.");
+  // Enforce minimum size of 3x3; treat dimensions less than 3 as 3
+  if (width < 3) width = 3;
+  if (height < 3) height = 3;
+
+  // Calculate actual corner coordinates (inclusive range)
+  const x1 = Math.round(x);
+  const y1 = Math.round(y);
+  const x2 = Math.round(x + width - 1);
+  const y2 = Math.round(y + height - 1);
+
+  // Top and bottom edges (excluding corners)
+  for (let i = x1 + 1; i < x2; i++) {
+    canvas.insert(i, y2, "─", ansi); // Top edge
+    canvas.insert(i, y1, "─", ansi); // Bottom edge
   }
-  // Top and bottom edges
-  for (let i = 1; i < width - 1; i++) {
-    canvas.insert(x + i, y + height - 1, "─", ansi);
-    canvas.insert(x + i, y, "─", ansi);
+
+  // Left and right edges (excluding corners)
+  for (let i = y1 + 1; i < y2; i++) {
+    canvas.insert(x1, i, "│", ansi); // Left edge
+    canvas.insert(x2, i, "│", ansi); // Right edge
   }
-  // Left and right edges
-  for (let i = 1; i < height - 1; i++) {
-    canvas.insert(x, y + i, "│", ansi);
-    canvas.insert(x + width - 1, y + i, "│", ansi);
-  }
-  // Top left corner
-  canvas.insert(x, y + height - 1, "┌", ansi);
-  // Top right corner
-  canvas.insert(x + width - 1, y + height - 1, "┐", ansi);
-  // Bottom right corner
-  canvas.insert(x + width - 1, y, "┘", ansi);
-  // Bottom left corner
-  canvas.insert(x, y, "└", ansi);
+
+  // Draw corners
+  canvas.insert(x1, y2, "┌", ansi); // Top left
+  canvas.insert(x2, y2, "┐", ansi); // Top right
+  canvas.insert(x2, y1, "┘", ansi); // Bottom right
+  canvas.insert(x1, y1, "└", ansi); // Bottom left
 }
