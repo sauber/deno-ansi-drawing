@@ -1,4 +1,4 @@
-# deno-ansi-drawing
+# Ansi Draw
 
 Drawing basic shapes in a terminal.
 
