@@ -1,13 +1,6 @@
 import type { Canvas } from "./types.ts";
 
-/** Draw a frame with rounded corners on a canvas
- * @param canvas The canvas to draw on
- * @param x The x-coordinate of the bottom-left corner of the frame
- * @param y The y-coordinate of the bottom-left corner of the frame
- * @param width The width of the frame; values < 3 are treated as 3
- * @param height The height of the frame; values < 3 are treated as 3
- * @param ansi The ANSI code for the frame characters
- */
+/** Draw a frame with rounded corners on a canvas */
 export function drawFrame(
   canvas: Canvas,
   x: number,
@@ -16,31 +9,78 @@ export function drawFrame(
   height: number,
   ansi?: string,
 ): void {
-  // Enforce minimum size of 3x3; treat dimensions less than 3 as 3
-  if (width < 3) width = 3;
-  if (height < 3) height = 3;
+  const absW = Math.abs(width);
+  const absH = Math.abs(height);
 
-  // Calculate actual corner coordinates (inclusive range)
-  const x1 = Math.round(x);
-  const y1 = Math.round(y);
-  const x2 = Math.round(x + width - 1);
-  const y2 = Math.round(y + height - 1);
-
-  // Top and bottom edges (excluding corners)
-  for (let i = x1 + 1; i < x2; i++) {
-    canvas.insert(i, y2, "─", ansi); // Top edge
-    canvas.insert(i, y1, "─", ansi); // Bottom edge
+  // If both dimensions are very small, draw nothing
+  if (absW < 0.5 && absH < 0.5) {
+    return;
   }
 
-  // Left and right edges (excluding corners)
-  for (let i = y1 + 1; i < y2; i++) {
-    canvas.insert(x1, i, "│", ansi); // Left edge
-    canvas.insert(x2, i, "│", ansi); // Right edge
+  const x0 = Math.round(x);
+  const y0 = Math.round(y);
+
+  // Horizontal line (height < 0.5, width >= 0.5)
+  if (absH < 0.5 && absW >= 0.5) {
+    const L = Math.round(absW);
+    if (L >= 1) {
+      canvas.insert(x0, y0, "╶", ansi);
+      // Fill middle with horizontal line characters
+      for (let i = 1; i < L - 1; i++) {
+        canvas.insert(x0 + i, y0, "─", ansi);
+      }
+      canvas.insert(x0 + L - 1, y0, "╴", ansi);
+    }
+    return;
   }
 
-  // Draw corners
-  canvas.insert(x1, y2, "┌", ansi); // Top left
-  canvas.insert(x2, y2, "┐", ansi); // Top right
-  canvas.insert(x2, y1, "┘", ansi); // Bottom right
-  canvas.insert(x1, y1, "└", ansi); // Bottom left
+  // Vertical line (width < 0.5, height >= 0.5)
+  if (absW < 0.5 && absH >= 0.5) {
+    const L = Math.round(absH);
+    if (L >= 1) {
+      // Insert bottom cap "╵" at bottom (y0 is bottom)
+      canvas.insert(x0, y0, "╵", ansi);
+      // Insert middle "│" for each intermediate row
+      for (let j = 1; j < L - 1; j++) {
+        canvas.insert(x0, y0 + j, "│", ansi);
+      }
+      // Insert top cap "╷" at top
+      canvas.insert(x0, y0 + L - 1, "╷", ansi);
+    }
+    return;
+  }
+
+  // Full frame
+  // Determine integer width and height, enforcing minimum size of 2x2
+  const w = Math.max(2, Math.round(absW));
+  const h = Math.max(2, Math.round(absH));
+
+  // Draw corners (y0 is bottom in canvas coordinate system)
+  canvas.insert(x0, y0, "╰", ansi); // bottom-left
+  canvas.insert(x0 + w, y0, "╯", ansi); // bottom-right
+  canvas.insert(x0, y0 + h, "╭", ansi); // top-left
+  canvas.insert(x0 + w, y0 + h, "╮", ansi); // top-right
+
+  // Draw top and bottom horizontal edges
+  for (let i = 1; i < w; i++) {
+    // bottom edge (y0)
+    canvas.insert(x0 + i, y0, "─", ansi);
+    // top edge (y0 + h)
+    canvas.insert(x0 + i, y0 + h, "─", ansi);
+  }
+
+  // Draw left and right vertical edges
+  for (let j = 1; j < h; j++) {
+    // left edge (x0)
+    canvas.insert(x0, y0 + j, "│", ansi);
+    // right edge (x0 + w)
+    canvas.insert(x0 + w, y0 + j, "│", ansi);
+  }
+
+  // Fill interior with spaces
+  for (let j = 1; j < h; j++) {
+    for (let i = 1; i < w; i++) {
+      canvas.insert(x0 + i, y0 + j, " ", ansi);
+    }
+  }
 }
