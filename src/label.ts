@@ -35,6 +35,6 @@ export function drawLabelCentered(
   ansi?: string,
 ): void {
   // Calculate the starting x-coordinate to center the text
-  const startX = x + Math.floor(text.length / 2);
+  const startX = Math.floor(x + text.length / 2);
   drawLabel(canvas, startX, y, text, ansi);
 }
