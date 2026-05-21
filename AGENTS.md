@@ -18,6 +18,7 @@ time onto a char canvas.
 
 ## Development Process
 
-- Test driven development, write test cases before code
-- Validate and fix one test case at a time, before proceeding to next
+- Test driven development, write test cases before code.
+- Validate and fix one test case at a time, before proceeding to next.
 - SOLID principles for organizing code
+- Group code in blocks with a single preceding comment line explaining purpose.

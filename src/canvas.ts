@@ -23,8 +23,6 @@ export class CharCanvas implements Canvas {
   private minY = Infinity;
   private maxY = -Infinity;
 
-  constructor() {}
-
   /** Number of single width chars of every line */
   public get width(): number {
     if (this.grid.size === 0) {
@@ -109,24 +107,17 @@ export class CharCanvas implements Canvas {
       if (ansi) {
         if (lastAnsi) {
           if (ansi !== lastAnsi) {
-            // Change ANSI style
             parts.push(ansi);
             lastAnsi = ansi;
-          } else {
-            // Same ANSI style, no need to re-apply
           }
         } else {
-          // New ANSI style
           parts.push(ansi);
           lastAnsi = ansi;
         }
       } else {
         if (lastAnsi) {
-          // Reset ANSI style when leaving styled cell
           parts.push("\x1b[0m");
           lastAnsi = "";
-        } else {
-          // Still no ANSI style, just another normal char
         }
       }
 

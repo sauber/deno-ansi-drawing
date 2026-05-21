@@ -36,7 +36,7 @@ export function drawRectangle(
   const xs = Math.floor(x), ys = Math.floor(y);
   const xe = Math.ceil(x + w), ye = Math.ceil(y + h);
   const hw = (xe - xs) * 2, hh = (ye - ys) * 2;
-  const grid: number[][] = Array.from({ length: hh }, () => Array(hw));
+  const grid: number[][] = Array.from({ length: hh }, () => Array(hw).fill(0));
 
   // Mark the grid cells that are covered by the rectangle.
   for (let col = 0; col < hw; col++) {

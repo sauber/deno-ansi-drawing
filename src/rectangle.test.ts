@@ -109,7 +109,5 @@ Deno.test("drawRectangle testcases", () => {
     const canvas = new CharCanvas();
     drawRectangle(canvas, x, y, width, height);
     assertEquals(canvas.toString(), expected, description);
-    // console.log(canvas.toString());
-    // console.log(description, ": PASS");
   }
 });

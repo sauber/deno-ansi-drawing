@@ -58,7 +58,6 @@ Deno.test("ANSI encoded chars", () => {
   const cp = new CharCanvas();
   cp.insert(0, 0, "あ", "\u001b[31m");
   cp.insert(1, 1, "い", "\u001b[32m");
-  const lines = cp.lines;
   assertEquals(cp.lines, [
     " \u001b[32mい\u001b[0m",
     "\u001b[31mあ \u001b[0m",

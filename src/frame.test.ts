@@ -1,4 +1,3 @@
-import type { Canvas } from "./types.ts";
 import { drawFrame } from "./frame.ts";
 import { assertEquals } from "@std/assert";
 import { CharCanvas } from "./canvas.ts";
@@ -49,7 +48,7 @@ const testcases: TestCase[] = [
 Deno.test("drawFrame", async (t) => {
   for (const [desc, x, y, width, height, expected] of testcases) {
     await t.step(desc, () => {
-      const canvas: Canvas = new CharCanvas();
+      const canvas = new CharCanvas();
       drawFrame(canvas, x, y, width, height);
       const output = canvas.toString();
       assertEquals(output, expected, desc);

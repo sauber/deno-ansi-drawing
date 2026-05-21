@@ -28,15 +28,12 @@ export function drawFrame(
     return;
   }
 
-  // Left and bottom
   const x1 = Math.floor(x);
   const y1 = Math.floor(y);
-
-  // Right and top
   let x2 = Math.floor(x + width);
   let y2 = Math.floor(y + height);
-  if (x2 == (x + width)) x2--;
-  if (y2 == (y + height)) y2--;
+  if (x2 === x + width) x2--;
+  if (y2 === y + height) y2--;
 
   // Horizontal line (height <= 1)
   if ((y2 - y1) < 1) {
@@ -67,8 +64,8 @@ export function drawFrame(
   }
 
   // Draw corners
-  canvas.insert(x1, y1, "╰", ansi); // bottom-left
-  canvas.insert(x2, y1, "╯", ansi); // bottom-right
-  canvas.insert(x1, y2, "╭", ansi); // top-left
-  canvas.insert(x2, y2, "╮", ansi); // top-right
+  canvas.insert(x1, y1, "╰", ansi);
+  canvas.insert(x2, y1, "╯", ansi);
+  canvas.insert(x1, y2, "╭", ansi);
+  canvas.insert(x2, y2, "╮", ansi);
 }

@@ -25,9 +25,6 @@ function brailleChar(mask: number): string {
  * Accumulates multiple dots that fall in the same character cell by OR-ing
  * their bit-masks, then inserts the resulting Braille character.
  *
- * Uses the same DOT_MAP and y-axis normalisation as accumulateDots before it
- * was inlined here.
- *
  * @param canvas The canvas to draw on
  * @param points Dot-space coordinates (x×2 canvas units, y×4 canvas units)
  * @param ansi Optional ANSI style applied to every character
